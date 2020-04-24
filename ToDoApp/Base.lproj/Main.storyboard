@@ -124,13 +124,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hq-2b-Gsh">
-                                                    <rect key="frame" x="16" y="11.5" width="42" height="20.5"/>
+                                                    <rect key="frame" x="8" y="11.5" width="42" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0PD-6T-fhB">
-                                                    <rect key="frame" x="365" y="10" width="24" height="23.5"/>
+                                                    <rect key="frame" x="382" y="10" width="24" height="24"/>
                                                     <state key="normal" image="notImportantTask"/>
                                                     <connections>
                                                         <action selector="addFavoriteTaskButton:" destination="Wtb-i2-1bH" eventType="touchUpInside" id="NHF-em-e4g"/>
@@ -138,19 +138,12 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="9hq-2b-Gsh" firstAttribute="centerX" secondItem="nFs-3o-v6A" secondAttribute="centerX" constant="-170" id="QWX-Iw-eA1"/>
-                                                <constraint firstItem="9hq-2b-Gsh" firstAttribute="centerY" secondItem="nFs-3o-v6A" secondAttribute="centerY" id="cMR-dw-3LR"/>
-                                                <constraint firstItem="0PD-6T-fhB" firstAttribute="centerY" secondItem="nFs-3o-v6A" secondAttribute="centerY" id="riI-ab-niZ"/>
+                                                <constraint firstItem="9hq-2b-Gsh" firstAttribute="centerY" secondItem="nFs-3o-v6A" secondAttribute="centerY" id="OOK-VW-M7I"/>
+                                                <constraint firstItem="0PD-6T-fhB" firstAttribute="centerY" secondItem="nFs-3o-v6A" secondAttribute="centerY" id="Tjf-Ge-CEv"/>
+                                                <constraint firstAttribute="trailing" secondItem="0PD-6T-fhB" secondAttribute="trailing" constant="8" id="deJ-Bd-HIA"/>
+                                                <constraint firstItem="9hq-2b-Gsh" firstAttribute="leading" secondItem="nFs-3o-v6A" secondAttribute="leading" constant="8" id="jvV-cZ-o5N"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <constraints>
-                                            <constraint firstItem="9hq-2b-Gsh" firstAttribute="top" secondItem="Wtb-i2-1bH" secondAttribute="top" constant="11.5" id="4C0-Md-GCy"/>
-                                            <constraint firstAttribute="trailing" secondItem="0PD-6T-fhB" secondAttribute="trailing" constant="25" id="X6B-GB-fQx"/>
-                                            <constraint firstItem="9hq-2b-Gsh" firstAttribute="leading" secondItem="Wtb-i2-1bH" secondAttribute="leading" constant="16" id="obX-0H-5LC"/>
-                                            <constraint firstAttribute="bottom" secondItem="0PD-6T-fhB" secondAttribute="bottom" constant="10" id="rWz-PU-ihn"/>
-                                            <constraint firstAttribute="bottom" secondItem="9hq-2b-Gsh" secondAttribute="bottom" constant="11.5" id="tha-V1-7gn"/>
-                                            <constraint firstItem="0PD-6T-fhB" firstAttribute="top" secondItem="Wtb-i2-1bH" secondAttribute="top" constant="10" id="w4t-yE-yCg"/>
-                                        </constraints>
                                         <connections>
                                             <outlet property="favoriteButton" destination="0PD-6T-fhB" id="yNp-LV-pPV"/>
                                         </connections>
