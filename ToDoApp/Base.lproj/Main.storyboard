@@ -86,7 +86,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6xE-et-dAq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3858" y="15"/>
+            <point key="canvasLocation" x="4422" y="0.0"/>
         </scene>
         <!--タスク一覧-->
         <scene sceneID="wg7-f3-ORb">
@@ -115,6 +115,33 @@
                                     <constraint firstAttribute="height" constant="665" id="ZnQ-BH-W7I"/>
                                     <constraint firstAttribute="width" constant="414" id="yh2-UY-wD3"/>
                                 </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskTableViewCell" id="Wtb-i2-1bH" customClass="taskTableViewCell" customModule="ToDoApp">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="taskTableViewCell" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wtb-i2-1bH" id="nFs-3o-v6A" customClass="taskTableViewCell" customModule="ToDoApp">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0PD-6T-fhB">
+                                                    <rect key="frame" x="378" y="9" width="24" height="24"/>
+                                                    <state key="normal" image="notImportantTask"/>
+                                                    <connections>
+                                                        <action selector="addFavoriteTaskButton:" destination="Wtb-i2-1bH" eventType="touchUpInside" id="NHF-em-e4g"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="0PD-6T-fhB" secondAttribute="trailing" constant="12" id="5My-7m-gC2"/>
+                                            <constraint firstItem="0PD-6T-fhB" firstAttribute="leading" secondItem="Wtb-i2-1bH" secondAttribute="leading" constant="378" id="k0u-NR-gEK"/>
+                                            <constraint firstItem="0PD-6T-fhB" firstAttribute="top" secondItem="Wtb-i2-1bH" secondAttribute="top" constant="9" id="wCI-kd-wcV"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="favoriteButton" destination="0PD-6T-fhB" id="yNp-LV-pPV"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -154,7 +181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2766.666666666667" y="0.0"/>
+            <point key="canvasLocation" x="2971" y="0.0"/>
         </scene>
         <!--完了タスク一覧-->
         <scene sceneID="dRN-AJ-Yvh">
@@ -278,6 +305,7 @@
         <image name="checkmark.seal" catalog="system" width="128" height="122"/>
         <image name="ellipsis.circle" catalog="system" width="128" height="121"/>
         <image name="exclamationmark.octagon" catalog="system" width="128" height="112"/>
+        <image name="notImportantTask" width="24" height="24"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
     </resources>
 </document>

@@ -12,10 +12,7 @@ import UIKit
 class TaskViewController: UIViewController {
     
     @IBOutlet weak var taskTableView: UITableView!
-    
     @IBOutlet weak var insertTaskTextField: UITextField!
-    
-
     
     //taskTableViewのセルに出力される配列を定義
     //初期値として"タスク"が入っている
@@ -96,6 +93,16 @@ class TaskViewController: UIViewController {
     
 }
 
+class Task {
+//    タスクのタイトル、重要かどうかのフラグ、完了済みかどうかのフラグ、識別子
+    var isImportant:UIImage?
+    var isNotImportant:UIImage?
+    init(isImportant:UIImage,isNotImportant:UIImage) {
+        self.isImportant = isImportant
+        self.isNotImportant = isNotImportant
+    }
+}
+
 //tableViewについて
 extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
     //taskArray内の数だけtableView内のセルが出力される
@@ -103,13 +110,12 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
         return self.taskArray.count
     }
     
-    //tableViewのセルについて
+    //textfieldに入力したタスクを配列に加える
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = self.taskArray[indexPath.row]
-        //UITableViewCellを返す
+        let cell = tableView.dequeueReusableCell(withIdentifier: "taskTableViewCell") as! taskTableViewCell
         return cell
     }
+    
                 
     //tableViewの編集を許可
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -146,6 +152,7 @@ extension TaskViewController : UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
     // textFieldに値が入力された後の処理
         userDefaults.set(taskArray, forKey: "taskArray")
+        //データの保存
         userDefaults.synchronize()
         taskArray = userDefaults.object(forKey: "taskArray") as! Array<String>
         //データをリロードする
