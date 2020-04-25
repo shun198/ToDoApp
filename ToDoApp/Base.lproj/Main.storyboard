@@ -108,44 +108,42 @@
                                     <action selector="addNewTaskButton:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="Tne-Ek-cRb"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nAZ-vx-RNS">
-                                <rect key="frame" x="0.0" y="148" width="414" height="665"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="teV-9k-guz" customClass="taskTableView">
+                                <rect key="frame" x="0.0" y="155" width="414" height="658"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="665" id="ZnQ-BH-W7I"/>
-                                    <constraint firstAttribute="width" constant="414" id="yh2-UY-wD3"/>
-                                </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskTableViewCell" id="Wtb-i2-1bH" customClass="taskTableViewCell" customModule="ToDoApp">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="taskTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskTableViewCell" id="qGu-te-GrA" customClass="taskTableViewCell" customModule="ToDoApp">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="taskTableViewCell" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wtb-i2-1bH" id="nFs-3o-v6A" customClass="taskTableViewCell" customModule="ToDoApp">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qGu-te-GrA" id="MGL-D4-Jcb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hq-2b-Gsh">
-                                                    <rect key="frame" x="8" y="11.5" width="42" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOf-5a-ufO">
+                                                    <rect key="frame" x="8" y="10" width="48" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0PD-6T-fhB">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kDO-Z4-16S">
                                                     <rect key="frame" x="382" y="10" width="24" height="24"/>
                                                     <state key="normal" image="notImportantTask"/>
                                                     <connections>
-                                                        <action selector="addFavoriteTaskButton:" destination="Wtb-i2-1bH" eventType="touchUpInside" id="NHF-em-e4g"/>
+                                                        <action selector="addFavoriteTaskButton:" destination="qGu-te-GrA" eventType="touchUpInside" id="v8D-nd-Enm"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="9hq-2b-Gsh" firstAttribute="centerY" secondItem="nFs-3o-v6A" secondAttribute="centerY" id="OOK-VW-M7I"/>
-                                                <constraint firstItem="0PD-6T-fhB" firstAttribute="centerY" secondItem="nFs-3o-v6A" secondAttribute="centerY" id="Tjf-Ge-CEv"/>
-                                                <constraint firstAttribute="trailing" secondItem="0PD-6T-fhB" secondAttribute="trailing" constant="8" id="deJ-Bd-HIA"/>
-                                                <constraint firstItem="9hq-2b-Gsh" firstAttribute="leading" secondItem="nFs-3o-v6A" secondAttribute="leading" constant="8" id="jvV-cZ-o5N"/>
+                                                <constraint firstItem="kDO-Z4-16S" firstAttribute="centerY" secondItem="MGL-D4-Jcb" secondAttribute="centerY" id="Euq-vm-Y5M"/>
+                                                <constraint firstItem="kDO-Z4-16S" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tOf-5a-ufO" secondAttribute="trailing" constant="8" symbolic="YES" id="PBa-IJ-Ocu"/>
+                                                <constraint firstItem="tOf-5a-ufO" firstAttribute="leading" secondItem="MGL-D4-Jcb" secondAttribute="leading" constant="8" id="rpb-bf-2Um"/>
+                                                <constraint firstAttribute="trailing" secondItem="kDO-Z4-16S" secondAttribute="trailing" constant="8" id="sIJ-Bk-4ot"/>
+                                                <constraint firstItem="tOf-5a-ufO" firstAttribute="centerY" secondItem="MGL-D4-Jcb" secondAttribute="centerY" id="uv4-bN-td7"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="favoriteButton" destination="0PD-6T-fhB" id="yNp-LV-pPV"/>
+                                            <outlet property="centerTaskLabel" destination="tOf-5a-ufO" id="OTr-aN-yJi"/>
+                                            <outlet property="favoriteButton" destination="kDO-Z4-16S" id="Vwa-Iu-QGE"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -153,15 +151,15 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="nAZ-vx-RNS" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="1gP-db-ztl"/>
-                            <constraint firstItem="nAZ-vx-RNS" firstAttribute="top" secondItem="H8R-KD-FCE" secondAttribute="bottom" constant="13" id="7NE-TH-kS3"/>
                             <constraint firstItem="M8c-mR-Lpb" firstAttribute="leading" secondItem="H8R-KD-FCE" secondAttribute="trailing" constant="15.5" id="AZA-vK-uF8"/>
-                            <constraint firstItem="nAZ-vx-RNS" firstAttribute="trailing" secondItem="O1u-W8-tvY" secondAttribute="trailing" id="E4e-ly-90T"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="teV-9k-guz" secondAttribute="trailing" id="HAE-6Z-DjH"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="M8c-mR-Lpb" secondAttribute="trailing" constant="13.5" id="Jql-pe-EXV"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="bottom" secondItem="teV-9k-guz" secondAttribute="bottom" id="KeZ-kE-rU3"/>
+                            <constraint firstItem="teV-9k-guz" firstAttribute="top" secondItem="H8R-KD-FCE" secondAttribute="bottom" constant="20" id="O0x-2Q-AVM"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="H8R-KD-FCE" secondAttribute="trailing" constant="60" id="TBe-Jl-tJs"/>
                             <constraint firstItem="M8c-mR-Lpb" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" constant="13" id="WDw-2E-HJM"/>
+                            <constraint firstItem="teV-9k-guz" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="cyw-dm-taf"/>
                             <constraint firstItem="H8R-KD-FCE" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" constant="13" id="dFB-IQ-uMH"/>
-                            <constraint firstItem="nAZ-vx-RNS" firstAttribute="top" secondItem="M8c-mR-Lpb" secondAttribute="bottom" constant="17" id="dlh-ge-GFe"/>
                             <constraint firstItem="H8R-KD-FCE" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" constant="60" id="rlb-7u-s62"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
@@ -183,12 +181,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="insertTaskTextField" destination="H8R-KD-FCE" id="VL7-fd-Lyx"/>
-                        <outlet property="taskTableView" destination="nAZ-vx-RNS" id="gnd-Sj-FBs"/>
+                        <outlet property="taskTableView" destination="teV-9k-guz" id="Kfa-w8-ghf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2796" y="0.0"/>
+            <point key="canvasLocation" x="2833" y="0.0"/>
         </scene>
         <!--完了タスク一覧-->
         <scene sceneID="dRN-AJ-Yvh">
