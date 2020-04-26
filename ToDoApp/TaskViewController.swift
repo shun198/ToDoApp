@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation.NSObject
 
 //ViewControllerについて
 class TaskViewController: UIViewController {
@@ -14,11 +15,7 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var taskTableView: UITableView!
     @IBOutlet weak var insertTaskTextField: UITextField!
     
-    //taskTableViewのセルに出力される配列を定義
-    //初期値として"タスク"が入っている
-    var taskArray = ["タスク"]
-    //userDefaultsのインスタンスを定義
-    let userDefaults = UserDefaults.standard
+    var task:Task
     
     
     override func viewDidLoad() {
@@ -34,10 +31,6 @@ class TaskViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem? = editButtonItem
         self.navigationItem.leftBarButtonItem?.title = "編集"
-        //UserDefaultsを使ってアプリ再起動後もデータを保持
-        if let insertedText = userDefaults.object(forKey: "taskArray") {
-            taskArray = insertedText as! Array<String>
-        }
         //tableViewの編集
        taskTableView.isEditing = false
        taskTableView.allowsSelectionDuringEditing = true
@@ -69,7 +62,7 @@ class TaskViewController: UIViewController {
     
     //タスクを追加
     func insertNewTask() {
-        taskArray.append(insertTaskTextField.text!)
+        task.taskArray.append(insertTaskTextField.text!)
         let indexPath = IndexPath(row: taskArray.count-1, section: 0)
         taskTableView.beginUpdates()
         taskTableView.insertRows(at: [indexPath], with: .automatic)
@@ -93,21 +86,35 @@ class TaskViewController: UIViewController {
     
 }
 
-class Task {
-//    タスクのタイトル、重要かどうかのフラグ、完了済みかどうかのフラグ、識別子
-    var isImportant:UIImage?
-    var isNotImportant:UIImage?
-    init(isImportant:UIImage,isNotImportant:UIImage) {
-        self.isImportant = isImportant
-        self.isNotImportant = isNotImportant
+class Task : NSObject,NSCoding {
+    
+    //taskTableViewのセルに出力される配列を定義
+    //初期値として"タスク"が入っている
+    var taskArray = ["タスク"]
+    //userDefaultsのインスタンスを定義
+    let userDefaults = UserDefaults.standard
+    //UserDefaultsを使ってアプリ再起動後もデータを保持
+    if let insertedText = userDefaults.object(forKey: "taskArray") {
+              taskArray = insertedText as! Task
+          }
+    
+    
+    func encode(with coder: NSCoder) {
+        <#code#>
     }
+    
+    required init?(coder: NSCoder) {
+        <#code#>
+    }
+    
+    
 }
 
 //tableViewについて
 extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
     //taskArray内の数だけtableView内のセルが出力される
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.taskArray.count
+        return task.taskArray.count
     }
     
     //textfieldに入力したタスクを配列に加える
@@ -139,7 +146,7 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
     //tableView内のセルを削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            taskArray.remove(at: indexPath.row)
+            task.taskArray.remove(at: indexPath.row)
             taskTableView.deleteRows(at: [indexPath as IndexPath],
             with:UITableView.RowAnimation.automatic)
         }
@@ -151,10 +158,10 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
 extension TaskViewController : UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
     // textFieldに値が入力された後の処理
-        userDefaults.set(taskArray, forKey: "taskArray")
+        task.userDefaults.set(task.taskArray, forKey: "taskArray")
         //データの保存
-        userDefaults.synchronize()
-        taskArray = userDefaults.object(forKey: "taskArray") as! Array<String>
+        task.userDefaults.synchronize()
+        task.taskArray = task.userDefaults.object(forKey: "taskArray") as! Array<String>
         //データをリロードする
         self.taskTableView.reloadData()
     }
@@ -168,7 +175,7 @@ extension TaskViewController : UITextFieldDelegate {
         }
         //textFieldにタスクを入力した時
         if let text = self.insertTaskTextField.text {
-        taskArray.append(text)
+        task.taskArray.append(text)
         self.insertTaskTextField.endEditing(true)
         //キーボードの確定ボタンを押すとテキスト内の文字がリセットされる
         self.insertTaskTextField.text = ""
