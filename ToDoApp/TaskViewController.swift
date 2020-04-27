@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Foundation.NSObject
 
 //ViewControllerについて
 class TaskViewController: UIViewController {
@@ -15,8 +14,11 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var taskTableView: UITableView!
     @IBOutlet weak var insertTaskTextField: UITextField!
     
-    var task:Task
-    
+    //taskTableViewのセルに出力される配列を定義
+    //初期値として"タスク"が入っている
+    var taskArray = ["タスク"]
+    //userDefaultsのインスタンスを定義
+    let userDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +27,18 @@ class TaskViewController: UIViewController {
         self.taskTableView.delegate = self
         self.taskTableView.dataSource = self
         self.insertTaskTextField.delegate = self
-        //アプリ起動時の編集ボタンのタイトル
-        
+        // UserDefaultsからデータを取得
+        _ = loadData()
+        // 保存データ
+//        print(loadClass!.task ?? 0)
         //デフォルトでアプリ起動時の編集ボタンはOFF
         self.navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem? = editButtonItem
         self.navigationItem.leftBarButtonItem?.title = "編集"
+        //UserDefaultsを使ってアプリ再起動後もデータを保持
+//        if let insertedText = userDefaults.object(forKey: "taskArray") {
+//            taskArray = insertedText as! Array<String>
+//        }
         //tableViewの編集
        taskTableView.isEditing = false
        taskTableView.allowsSelectionDuringEditing = true
@@ -49,6 +57,12 @@ class TaskViewController: UIViewController {
          }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        // データを作成してUserDefaultsに保存
+        let myTask = Task(task: "保存データ")
+        saveData(myTask)
+    }
+    
     //addNewTaskButtonが押された時の処理
     @IBAction func addNewTaskButton(_ sender: Any) {
         //textFieldの中身が空の時、警告が出る
@@ -62,7 +76,7 @@ class TaskViewController: UIViewController {
     
     //タスクを追加
     func insertNewTask() {
-        task.taskArray.append(insertTaskTextField.text!)
+        taskArray.append(insertTaskTextField.text!)
         let indexPath = IndexPath(row: taskArray.count-1, section: 0)
         taskTableView.beginUpdates()
         taskTableView.insertRows(at: [indexPath], with: .automatic)
@@ -86,35 +100,43 @@ class TaskViewController: UIViewController {
     
 }
 
-class Task : NSObject,NSCoding {
-    
-    //taskTableViewのセルに出力される配列を定義
-    //初期値として"タスク"が入っている
-    var taskArray = ["タスク"]
-    //userDefaultsのインスタンスを定義
-    let userDefaults = UserDefaults.standard
-    //UserDefaultsを使ってアプリ再起動後もデータを保持
-    if let insertedText = userDefaults.object(forKey: "taskArray") {
-              taskArray = insertedText as! Task
-          }
-    
-    
-    func encode(with coder: NSCoder) {
-        <#code#>
+//Taskクラスの定義
+class Task: NSObject, NSSecureCoding {
+    static var supportsSecureCoding: Bool = true
+    var task: String!
+    init(task: String) {
+      self.task = task
     }
-    
-    required init?(coder: NSCoder) {
-        <#code#>
+    func encode(with aCoder: NSCoder) {
+      aCoder.encode(task, forKey: "task")
     }
-    
-    
+    required init?(coder aDecoder: NSCoder) {
+    self.task = (aDecoder.decodeObject(forKey: "task") as! String)
+    }
 }
+    // 保存処理
+    func saveData(_ value : Task){
+        // 警告で使えと言われたメソッドに変更　例外を投げるのでtry?を追加
+        guard let archiveData = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) else {
+            fatalError("Archive failed")
+        }
+        UserDefaults.standard.set(archiveData, forKey: "task")
+    }
+
+// ロード処理
+    func loadData() -> Task? {
+        if let loadedData = UserDefaults().data(forKey: "key") {
+            return try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(loadedData) as? Task
+        }
+        return nil
+    }
+
 
 //tableViewについて
 extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
     //taskArray内の数だけtableView内のセルが出力される
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return task.taskArray.count
+        return self.taskArray.count
     }
     
     //textfieldに入力したタスクを配列に加える
@@ -146,7 +168,7 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
     //tableView内のセルを削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            task.taskArray.remove(at: indexPath.row)
+            taskArray.remove(at: indexPath.row)
             taskTableView.deleteRows(at: [indexPath as IndexPath],
             with:UITableView.RowAnimation.automatic)
         }
@@ -158,11 +180,11 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
 extension TaskViewController : UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
     // textFieldに値が入力された後の処理
-        task.userDefaults.set(task.taskArray, forKey: "taskArray")
+        userDefaults.set(taskArray, forKey: "taskArray")
         //データの保存
-        task.userDefaults.synchronize()
-        task.taskArray = task.userDefaults.object(forKey: "taskArray") as! Array<String>
-        //データをリロードする
+        userDefaults.synchronize()
+        taskArray = userDefaults.object(forKey: "taskArray") as! Array<String>
+//       データをリロードする
         self.taskTableView.reloadData()
     }
     
@@ -173,16 +195,16 @@ extension TaskViewController : UITextFieldDelegate {
             showAlert()
             return true
         }
-        //textFieldにタスクを入力した時
+//        textFieldにタスクを入力した時
         if let text = self.insertTaskTextField.text {
-        task.taskArray.append(text)
+        taskArray.append(text)
         self.insertTaskTextField.endEditing(true)
         //キーボードの確定ボタンを押すとテキスト内の文字がリセットされる
         self.insertTaskTextField.text = ""
         }
         //データをリロードする
         self.taskTableView.reloadData()
-        return true
-    }
+            return true
+       }
     
 }

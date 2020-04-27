@@ -142,8 +142,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="centerTaskLabel" destination="tOf-5a-ufO" id="OTr-aN-yJi"/>
                                             <outlet property="favoriteButton" destination="kDO-Z4-16S" id="Vwa-Iu-QGE"/>
+                                            <outlet property="taskLabel" destination="tOf-5a-ufO" id="han-od-Lf8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -186,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2888" y="9"/>
+            <point key="canvasLocation" x="2833" y="0.0"/>
         </scene>
         <!--完了タスク一覧-->
         <scene sceneID="dRN-AJ-Yvh">

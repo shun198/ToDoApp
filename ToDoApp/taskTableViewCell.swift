@@ -15,7 +15,7 @@ protocol taskTableViewCellDelegate {
 class taskTableViewCell: UITableViewCell {
     
     @IBOutlet weak var favoriteButton: UIButton!
-    @IBOutlet weak var centerTaskLabel: UILabel!
+    @IBOutlet weak var taskLabel: UILabel!
     
     
     var task:Task?
