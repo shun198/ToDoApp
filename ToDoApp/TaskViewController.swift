@@ -15,7 +15,6 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var insertTaskTextField: UITextField!
     
     //taskTableViewのセルに出力される配列を定義
-    //初期値として"タスク"が入っている
     var taskArray:[Task] = []
     
     override func viewDidLoad() {
@@ -47,32 +46,17 @@ class TaskViewController: UIViewController {
          }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        // データを作成してUserDefaultsに保存
-        let myTask = Task(task: "保存データ")
-        saveData(myTask)
-    }
-    
-    //addNewTaskButtonが押された時の処理
-    @IBAction func addNewTaskButton(_ sender: Any) {
-        //textFieldの中身が空の時、警告が出る
-        if insertTaskTextField.text == "" {
-            showAlert()
-            return
-        }
-        //addNewTaskButtonを押すとタスクが追加される
-        insertNewTask()
-    }
-    
     //タスクを追加
     func insertNewTask() {
-        taskArray.append(insertTaskTextField.text!)
-        let indexPath = IndexPath(row: taskArray.count-1, section: 0)
-        taskTableView.beginUpdates()
-        taskTableView.insertRows(at: [indexPath], with: .automatic)
-        taskTableView.endUpdates()
+        if let text = insertTaskTextField.text {
+        let task = Task(task: text)
+        taskArray.append(task)
+        UserDefaults.standard.save(task)
+        taskTableView.reloadData()
         insertTaskTextField.text = ""
-        view.endEditing(true)
+        } else {
+            print("error")
+        }
     }
     
     //textFieldの中身が空の時、警告が出る
@@ -88,24 +72,20 @@ class TaskViewController: UIViewController {
         }
     }
     
+    //addNewTaskButtonが押された時の処理
+    @IBAction func addNewTaskButton(_ sender: Any) {
+        //textFieldの中身が空の時、警告が出る
+        if insertTaskTextField.text == "" {
+            showAlert()
+            return
+        }
+        //addNewTaskButtonを押すとタスクが追加される
+        insertNewTask()
+    }
+    
+
+    
 }
-    // 保存処理
-    func saveData(_ value : Task){
-        // 警告で使えと言われたメソッドに変更　例外を投げるのでtry?を追加
-        guard let archiveData = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) else {
-            fatalError("Archive failed")
-        }
-        UserDefaults.standard.set(archiveData, forKey: "task")
-    }
-
-// ロード処理
-    func loadData() -> Task? {
-        if let loadedData = UserDefaults().data(forKey: "key") {
-            return try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(loadedData) as? Task
-        }
-        return nil
-    }
-
 
 //tableViewについて
 extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
@@ -146,6 +126,7 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
             taskArray.remove(at: indexPath.row)
             taskTableView.deleteRows(at: [indexPath as IndexPath],
             with:UITableView.RowAnimation.automatic)
+            taskTableView.reloadData()
         }
     }
     
@@ -153,15 +134,6 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
 
 //textFieldについて
 extension TaskViewController : UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-    // textFieldに値が入力された後の処理
-        userDefaults.set(taskArray, forKey: "taskArray")
-        //データの保存
-        userDefaults.synchronize()
-        taskArray = userDefaults.object(forKey: "taskArray") as! Array<Task>
-//       データをリロードする
-        self.taskTableView.reloadData()
-    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // returnキーを押した時の処理
@@ -170,16 +142,10 @@ extension TaskViewController : UITextFieldDelegate {
             showAlert()
             return true
         }
-//        textFieldにタスクを入力した時
-        if let text = self.insertTaskTextField.text {
-        taskArray.append(text)
-        self.insertTaskTextField.endEditing(true)
-        //キーボードの確定ボタンを押すとテキスト内の文字がリセットされる
-        self.insertTaskTextField.text = ""
-        }
-        //データをリロードする
-        self.taskTableView.reloadData()
+//       textFieldにタスクを入力した時
+            insertNewTask()
             return true
-       }
+        }
+            
     
 }

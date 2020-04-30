@@ -16,8 +16,7 @@ class taskTableViewCell: UITableViewCell {
     
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var taskLabel: UILabel!
-    
-    
+
     var task:Task?
     var delegate:taskTableViewCellDelegate?
     var isImportant = UIImage(named: "importantTask.png")
