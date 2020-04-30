@@ -16,9 +16,7 @@ class TaskViewController: UIViewController {
     
     //taskTableViewのセルに出力される配列を定義
     //初期値として"タスク"が入っている
-    var taskArray = ["タスク"]
-    //userDefaultsのインスタンスを定義
-    let userDefaults = UserDefaults.standard
+    var taskArray:[Task] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,19 +24,11 @@ class TaskViewController: UIViewController {
         //デリゲートを定義
         self.taskTableView.delegate = self
         self.taskTableView.dataSource = self
-        self.insertTaskTextField.delegate = self
-        // UserDefaultsからデータを取得
-        _ = loadData()
-        // 保存データ
-//        print(loadClass!.task ?? 0)
-        //デフォルトでアプリ起動時の編集ボタンはOFF
+        //データの読み取り処理を行う
+        taskArray = UserDefaults.standard.load()
         self.navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem? = editButtonItem
         self.navigationItem.leftBarButtonItem?.title = "編集"
-        //UserDefaultsを使ってアプリ再起動後もデータを保持
-//        if let insertedText = userDefaults.object(forKey: "taskArray") {
-//            taskArray = insertedText as! Array<String>
-//        }
         //tableViewの編集
        taskTableView.isEditing = false
        taskTableView.allowsSelectionDuringEditing = true
@@ -98,21 +88,6 @@ class TaskViewController: UIViewController {
         }
     }
     
-}
-
-//Taskクラスの定義
-class Task: NSObject, NSSecureCoding {
-    static var supportsSecureCoding: Bool = true
-    var task: String!
-    init(task: String) {
-      self.task = task
-    }
-    func encode(with aCoder: NSCoder) {
-      aCoder.encode(task, forKey: "task")
-    }
-    required init?(coder aDecoder: NSCoder) {
-    self.task = (aDecoder.decodeObject(forKey: "task") as! String)
-    }
 }
     // 保存処理
     func saveData(_ value : Task){
@@ -183,7 +158,7 @@ extension TaskViewController : UITextFieldDelegate {
         userDefaults.set(taskArray, forKey: "taskArray")
         //データの保存
         userDefaults.synchronize()
-        taskArray = userDefaults.object(forKey: "taskArray") as! Array<String>
+        taskArray = userDefaults.object(forKey: "taskArray") as! Array<Task>
 //       データをリロードする
         self.taskTableView.reloadData()
     }
