@@ -16,19 +16,21 @@ class TaskViewController: UIViewController {
     
     //taskTableViewのセルに出力される配列を定義
     var taskArray:[Task] = []
+//  var taskTabelViewCell:Task
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         //デリゲートを定義
-        self.taskTableView.delegate = self
-        self.taskTableView.dataSource = self
+        taskTableView.delegate = self
+        taskTableView.dataSource = self
         //データの読み取り処理を行う
         taskArray = UserDefaults.standard.load()
-        self.navigationController?.isNavigationBarHidden = false
+        //編集ボタンの表示
+        navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem? = editButtonItem
-        self.navigationItem.leftBarButtonItem?.title = "編集"
-        //tableViewの編集
+        navigationItem.leftBarButtonItem?.title = "編集"
+        //編集ボタンの設定
        taskTableView.isEditing = false
        taskTableView.allowsSelectionDuringEditing = true
     }
@@ -82,16 +84,14 @@ class TaskViewController: UIViewController {
         //addNewTaskButtonを押すとタスクが追加される
         insertNewTask()
     }
-    
 
-    
 }
 
 //tableViewについて
 extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
     //taskArray内の数だけtableView内のセルが出力される
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.taskArray.count
+        return taskArray.count
     }
     
     //textfieldに入力したタスクを配列に加える
@@ -126,7 +126,7 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
             taskArray.remove(at: indexPath.row)
             taskTableView.deleteRows(at: [indexPath as IndexPath],
             with:UITableView.RowAnimation.automatic)
-            taskTableView.reloadData()
+            UserDefaults.standard.synchronize()
         }
     }
     
@@ -146,6 +146,4 @@ extension TaskViewController : UITextFieldDelegate {
             insertNewTask()
             return true
         }
-            
-    
 }

@@ -12,7 +12,8 @@ class ImportantTaskViewController: UIViewController {
     
     @IBOutlet weak var importantTaskTableView: UITableView!
     
-    var taskArray = ["北海道","青森県"]
+    
+    var taskArray:[Task] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,16 +37,11 @@ extension ImportantTaskViewController: UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        cell.textLabel?.text = self.taskArray[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "taskTableViewCell") as! taskTableViewCell
         //UITableViewCellを返す
         return cell
-    }
+        }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // タップされたセルの行番号を出力
-        print("\(indexPath.row)番目の行が選択されました。")
-    }
     
     //UITableViewCellを編集可能な状態にする
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

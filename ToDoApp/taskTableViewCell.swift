@@ -17,8 +17,6 @@ class taskTableViewCell: UITableViewCell {
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var taskLabel: UILabel!
 
-    var task:Task?
-    var delegate:taskTableViewCellDelegate?
     var isImportant = UIImage(named: "importantTask.png")
     var isNotImportant = UIImage(named: "notImportantTask.png")
     
@@ -29,13 +27,11 @@ class taskTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
-        
     }
     
     
@@ -45,10 +41,13 @@ class taskTableViewCell: UITableViewCell {
         if flg == false {
             favoriteButton.setImage(isImportant, for: .normal)
             flg = true
+            //タスク一覧に印をつけたタスクを重要タスク一覧に反映
+            
             print("false")
         } else if flg == true {
             favoriteButton.setImage(isNotImportant, for: .normal)
             flg = false
+            //タスク一覧に印をつけたタスクを重要タスク一覧から削除
             print("true")
             }
         }

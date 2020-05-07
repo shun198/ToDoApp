@@ -42,4 +42,9 @@ extension UserDefaults {
         }
     }
     
+    //削除処理
+    func delete(index: Int) {
+        
+    }
+    
 }
