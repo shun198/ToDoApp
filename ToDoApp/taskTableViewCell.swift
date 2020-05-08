@@ -8,21 +8,20 @@
 
 import UIKit
 
-protocol taskTableViewCellDelegate {
-    func didAddFavoriteTask(task:String)
-}
 
 class taskTableViewCell: UITableViewCell {
     
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var taskLabel: UILabel!
-
-    var isImportant = UIImage(named: "importantTask.png")
-    var isNotImportant = UIImage(named: "notImportantTask.png")
+    
+    var task:Task?
+    var index: Int?
+//    var isImportant = UIImage(named: "importantTask.png")
+//    var isNotImportant = UIImage(named: "notImportantTask.png")
     
     //フラグを定義
     var flg = false
-    
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,23 +33,32 @@ class taskTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setup(task: Task, index: Int) {
+        taskLabel.text = task.contents
+        if task.isImportant {
+            favoriteButton.setImage(#imageLiteral(resourceName: "importantTask"), for: .normal)
+        } else {
+            favoriteButton.setImage(#imageLiteral(resourceName: "notImportantTask"), for: .normal)
+        }
+        self.task = task
+        self.index = index
+    }
     
     @IBAction func addFavoriteTaskButton(_ sender: UIButton) {
         //ボタンの画像を切り替える処理
         //重要タスクを追加する処理
-        if flg == false {
-            favoriteButton.setImage(isImportant, for: .normal)
-            flg = true
-            //タスク一覧に印をつけたタスクを重要タスク一覧に反映
-            
-            print("false")
-        } else if flg == true {
-            favoriteButton.setImage(isNotImportant, for: .normal)
-            flg = false
-            //タスク一覧に印をつけたタスクを重要タスク一覧から削除
-            print("true")
-            }
+        guard let task = task, let index = index else {
+            return
         }
+        if task.isImportant {
+            favoriteButton.setImage(#imageLiteral(resourceName: "notImportantTask"), for: .normal)
+            task.isImportant = false
+        } else {
+            favoriteButton.setImage(#imageLiteral(resourceName: "importantTask"), for: .normal)
+            task.isImportant = true
+        }
+        UserDefaults.standard.update(task: task, index: index)
+    }
     
     
     }

@@ -11,9 +11,9 @@ import Foundation
 //保存対象のカスタムクラス
 class Task :Codable {
     
-    var task:String
+    var contents:String
+    var isImportant = false
     init(task:String) {
-        self.task = task
+        self.contents = task
     }
-    
 }

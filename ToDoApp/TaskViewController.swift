@@ -16,7 +16,7 @@ class TaskViewController: UIViewController {
     
     //taskTableViewのセルに出力される配列を定義
     var taskArray:[Task] = []
-//  var taskTabelViewCell:Task
+    var task:Task?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +97,7 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
     //textfieldに入力したタスクを配列に加える
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskTableViewCell") as! taskTableViewCell
+        cell.setup(task: taskArray[indexPath.row], index: indexPath.row)
         return cell
     }
     
@@ -126,10 +127,13 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
             taskArray.remove(at: indexPath.row)
             taskTableView.deleteRows(at: [indexPath as IndexPath],
             with:UITableView.RowAnimation.automatic)
-            UserDefaults.standard.synchronize()
+            guard let task = task else {
+                return
+            }
+            UserDefaults.standard.delete(task: task, index: indexPath.row)
         }
     }
-    
+
 }
 
 //textFieldについて

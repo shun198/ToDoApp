@@ -42,8 +42,30 @@ extension UserDefaults {
         }
     }
     
+    //cellの更新
+    func update(task: Task, index: Int) {
+        var loadData: [Data] = []
+        var loadTask: [Task] = load()
+        loadTask[index] = task
+        for task in loadTask {
+            if let data = try? JSONEncoder().encode(task) {
+                loadData.append(data)
+            }
+        }
+        set(loadData, forKey: taskKey)
+    }
+    
     //削除処理
-    func delete(index: Int) {
+    func delete(task: Task, index: Int) {
+        var loadData:[Data] = []
+        var deleteTask:[Task] = load()
+        deleteTask[index] = task
+        for task in deleteTask {
+            if (try? JSONEncoder().encode(task)) != nil {
+                loadData.remove(at: index)
+            }
+        }
+        set(deleteTask,forKey: taskKey)
         
     }
     
