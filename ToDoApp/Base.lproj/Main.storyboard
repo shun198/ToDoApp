@@ -57,31 +57,15 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHr-jI-dPR">
-                                <rect key="frame" x="363" y="103" width="31" height="30"/>
-                                <state key="normal" title="追加"/>
-                                <connections>
-                                    <action selector="addNewTaskButton:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="WQe-ft-lhN"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タスクを入力してください" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JsK-04-EKY">
-                                <rect key="frame" x="64" y="99" width="290" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Lnx-Av-rue" firstAttribute="bottom" secondItem="PQr-Ze-W5v" secondAttribute="bottom" id="5Ql-bI-cYD"/>
-                            <constraint firstItem="Lnx-Av-rue" firstAttribute="top" secondItem="JsK-04-EKY" secondAttribute="bottom" constant="15" id="6k2-91-tZb"/>
-                            <constraint firstItem="fHr-jI-dPR" firstAttribute="leading" secondItem="JsK-04-EKY" secondAttribute="trailing" constant="9" id="89r-Dq-YDD"/>
-                            <constraint firstItem="Lnx-Av-rue" firstAttribute="top" secondItem="fHr-jI-dPR" secondAttribute="bottom" constant="15" id="8la-Re-8IT"/>
-                            <constraint firstItem="fHr-jI-dPR" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="15" id="WjJ-1l-Jh3"/>
-                            <constraint firstItem="JsK-04-EKY" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="64" id="ZEM-DI-o6t"/>
-                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="fHr-jI-dPR" secondAttribute="trailing" constant="20" id="aea-5L-XGy"/>
-                            <constraint firstItem="JsK-04-EKY" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="11" id="c2t-Pz-QA8"/>
+                            <constraint firstItem="Lnx-Av-rue" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="60" id="5XC-ad-hAh"/>
+                            <constraint firstItem="Lnx-Av-rue" firstAttribute="trailing" secondItem="PQr-Ze-W5v" secondAttribute="trailing" id="GBc-tY-mXc"/>
+                            <constraint firstItem="Lnx-Av-rue" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="bLK-2F-LIc"/>
                             <constraint firstItem="Lnx-Av-rue" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="fEz-wo-TFi"/>
-                            <constraint firstItem="fHr-jI-dPR" firstAttribute="leading" secondItem="JsK-04-EKY" secondAttribute="trailing" constant="9" id="m6C-rK-vhn"/>
+                            <constraint firstItem="Lnx-Av-rue" firstAttribute="bottom" secondItem="PQr-Ze-W5v" secondAttribute="bottom" id="qLV-th-zAx"/>
                             <constraint firstAttribute="trailing" secondItem="Lnx-Av-rue" secondAttribute="trailing" id="xUs-xo-jyh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
@@ -246,99 +230,6 @@
             </objects>
             <point key="canvasLocation" x="2833" y="0.0"/>
         </scene>
-        <!--完了タスク一覧-->
-        <scene sceneID="dRN-AJ-Yvh">
-            <objects>
-                <viewController storyboardIdentifier="FinishedTaskViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IuH-A0-sdE" customClass="FinishedTaskViewController" customModule="ToDoApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6qD-Sx-IhQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bka-30-AfE">
-                                <rect key="frame" x="0.0" y="148" width="414" height="665"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="taskTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskTableViewCell" id="QzZ-02-dqn" customClass="taskTableViewCell" customModule="ToDoApp">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QzZ-02-dqn" id="GpL-Hq-qbO">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTd-mD-A4A">
-                                                    <rect key="frame" x="8" y="10" width="48" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPZ-yB-RPU">
-                                                    <rect key="frame" x="382" y="10" width="24" height="24"/>
-                                                    <state key="normal" image="notImportantTask"/>
-                                                    <connections>
-                                                        <action selector="addFavoriteTaskButton:" destination="QzZ-02-dqn" eventType="touchUpInside" id="1wZ-yV-Tlw"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="fPZ-yB-RPU" secondAttribute="trailing" constant="8" id="DaS-dF-5xp"/>
-                                                <constraint firstItem="LTd-mD-A4A" firstAttribute="leading" secondItem="GpL-Hq-qbO" secondAttribute="leading" constant="8" id="S7K-kq-5qL"/>
-                                                <constraint firstItem="fPZ-yB-RPU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LTd-mD-A4A" secondAttribute="trailing" constant="8" symbolic="YES" id="fdy-qC-Sre"/>
-                                                <constraint firstItem="fPZ-yB-RPU" firstAttribute="centerY" secondItem="GpL-Hq-qbO" secondAttribute="centerY" id="nof-eM-r8g"/>
-                                                <constraint firstItem="LTd-mD-A4A" firstAttribute="centerY" secondItem="GpL-Hq-qbO" secondAttribute="centerY" id="rha-9j-iwa"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="favoriteButton" destination="fPZ-yB-RPU" id="s0v-jq-gZo"/>
-                                            <outlet property="taskLabel" destination="LTd-mD-A4A" id="2qM-aW-eDL"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RHp-GV-qSz">
-                                <rect key="frame" x="363" y="99" width="31" height="30"/>
-                                <state key="normal" title="追加"/>
-                                <connections>
-                                    <action selector="addNewTaskButton:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="ISZ-Ux-39t"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タスクを入力してください" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vg7-DF-aLC">
-                                <rect key="frame" x="60" y="97" width="294" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="vg7-DF-aLC" firstAttribute="leading" secondItem="jFO-cG-gjf" secondAttribute="leading" constant="60" id="0bd-V5-7Hm"/>
-                            <constraint firstItem="vg7-DF-aLC" firstAttribute="top" secondItem="jFO-cG-gjf" secondAttribute="top" constant="9" id="2ou-Ww-g5V"/>
-                            <constraint firstItem="RHp-GV-qSz" firstAttribute="top" secondItem="jFO-cG-gjf" secondAttribute="top" constant="11" id="8WA-wa-fvq"/>
-                            <constraint firstItem="jFO-cG-gjf" firstAttribute="trailing" secondItem="RHp-GV-qSz" secondAttribute="trailing" constant="20" id="Azt-3F-4ha"/>
-                            <constraint firstItem="bka-30-AfE" firstAttribute="leading" secondItem="jFO-cG-gjf" secondAttribute="leading" id="B8B-1h-TTl"/>
-                            <constraint firstItem="bka-30-AfE" firstAttribute="trailing" secondItem="jFO-cG-gjf" secondAttribute="trailing" id="I7F-dD-ThZ"/>
-                            <constraint firstItem="bka-30-AfE" firstAttribute="bottom" secondItem="jFO-cG-gjf" secondAttribute="bottom" id="JUW-Vr-ZJV"/>
-                            <constraint firstItem="RHp-GV-qSz" firstAttribute="leading" secondItem="vg7-DF-aLC" secondAttribute="trailing" constant="9" id="Yni-jg-bHG"/>
-                            <constraint firstItem="bka-30-AfE" firstAttribute="top" secondItem="RHp-GV-qSz" secondAttribute="bottom" constant="19" id="YxL-Oq-uQB"/>
-                            <constraint firstItem="bka-30-AfE" firstAttribute="top" secondItem="jFO-cG-gjf" secondAttribute="top" constant="60" id="sNg-3c-Hzu"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="jFO-cG-gjf"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="完了タスク一覧" id="jbt-Du-sih">
-                        <barButtonItem key="backBarButtonItem" title="戻る" id="DBQ-OH-DoM"/>
-                        <barButtonItem key="leftBarButtonItem" title="編集" id="1es-ZD-ipF"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="ellipsis.circle" catalog="system" id="Aw1-aU-OOJ">
-                            <connections>
-                                <segue destination="ssU-ke-ww3" kind="show" id="SEC-8R-zB7"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="finishedTaskTableView" destination="bka-30-AfE" id="dwi-Gq-xCQ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xNR-Rm-utr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2303" y="836"/>
-        </scene>
         <!--My Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -351,7 +242,6 @@
                     <connections>
                         <segue destination="dAa-ua-SBx" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="uDK-39-tlR" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
-                        <segue destination="F2i-2b-CeN" kind="relationship" relationship="viewControllers" id="Mn5-mw-VhH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -396,31 +286,11 @@
             </objects>
             <point key="canvasLocation" x="992.75362318840587" y="-710.49107142857144"/>
         </scene>
-        <!--完了タスク一覧-->
-        <scene sceneID="VjW-R0-mzW">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F2i-2b-CeN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="完了タスク一覧" image="checkmark.seal" catalog="system" id="87v-YO-qZp"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Lju-lD-rnb">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="IuH-A0-sdE" kind="relationship" relationship="rootViewController" id="ycd-eu-dpX"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="U4d-gu-a4p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1317" y="836"/>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wWk-Hl-9ia"/>
+        <segue reference="8d4-zl-7D4"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="checkmark.seal" catalog="system" width="128" height="122"/>
         <image name="ellipsis.circle" catalog="system" width="128" height="121"/>
         <image name="exclamationmark.octagon" catalog="system" width="128" height="112"/>
         <image name="notImportantTask" width="24" height="24"/>

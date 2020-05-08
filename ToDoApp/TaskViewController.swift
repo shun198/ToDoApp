@@ -123,18 +123,21 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
     
     //tableView内のセルを削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        //画面上のcellを削除
         if editingStyle == UITableViewCell.EditingStyle.delete {
             taskArray.remove(at: indexPath.row)
             taskTableView.deleteRows(at: [indexPath as IndexPath],
             with:UITableView.RowAnimation.automatic)
+            //UserDefaultsからcellを削除
             guard let task = task else {
                 return
             }
             UserDefaults.standard.delete(task: task, index: indexPath.row)
+            UserDefaults.standard.save(task)
         }
     }
 
-}
+  }
 
 //textFieldについて
 extension TaskViewController : UITextFieldDelegate {
