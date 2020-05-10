@@ -56,17 +56,17 @@ extension UserDefaults {
     }
     
     //削除処理
-    func delete(task: Task, index: Int) {
-        var loadData:[Data] = []
+    func delete(index: Int) {
+        var loadData: [Data] = []
         var deleteTask:[Task] = load()
-        deleteTask[index] = task
+        deleteTask.remove(at: index)
         for task in deleteTask {
-            if (try? JSONEncoder().encode(task)) != nil {
-                loadData.remove(at: index)
+            if let data = try? JSONEncoder().encode(task) {
+                loadData.append(data)
             }
         }
-        set(deleteTask,forKey: taskKey)
-        
+        set(loadData, forKey: taskKey)
     }
     
 }
+

@@ -129,11 +129,7 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
             taskTableView.deleteRows(at: [indexPath as IndexPath],
             with:UITableView.RowAnimation.automatic)
             //UserDefaultsからcellを削除
-            guard let task = task else {
-                return
-            }
-            UserDefaults.standard.delete(task: task, index: indexPath.row)
-            UserDefaults.standard.save(task)
+            UserDefaults.standard.delete(index: indexPath.row)
         }
     }
 
