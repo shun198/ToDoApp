@@ -16,7 +16,6 @@ class TaskViewController: UIViewController {
     
     //taskTableViewのセルに出力される配列を定義
     var taskArray:[Task] = []
-    var task:Task?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,7 +100,7 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     
-                
+
     //tableViewの編集を許可
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -144,9 +143,9 @@ extension TaskViewController : UITextFieldDelegate {
         if insertTaskTextField.text == "" {
             showAlert()
             return true
-        }
-//       textFieldにタスクを入力した時
+        } else {
             insertNewTask()
             return true
         }
+    }
 }
