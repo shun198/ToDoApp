@@ -18,6 +18,7 @@ extension UserDefaults {
         guard let loadData = array(forKey: taskKey) else {
             return []
         }
+        
         var tasks: [Task] = []
         
         for element in loadData {
@@ -67,6 +68,24 @@ extension UserDefaults {
         }
         set(loadData, forKey: taskKey)
     }
+    
+    //重要タスクを取り込む
+    func loadImportantTask(task:Task, index:Int) {
+        var loadData:[Data] = []
+        var importantTask:[Task] = load()
+        if  !task.isImportant {
+            importantTask.append(task)
+        } else {
+            importantTask.remove(at: index)
+        }
+        for task in importantTask {
+            if let data = try? JSONEncoder().encode(task) {
+                loadData.append(data)
+            }
+        }
+        set(loadData,forKey: taskKey)
+    }
+
     
 }
 

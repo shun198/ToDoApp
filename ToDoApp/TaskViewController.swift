@@ -23,6 +23,7 @@ class TaskViewController: UIViewController {
         //デリゲートを定義
         taskTableView.delegate = self
         taskTableView.dataSource = self
+        insertTaskTextField.delegate = self
         //データの読み取り処理を行う
         taskArray = UserDefaults.standard.load()
         //編集ボタンの表示
@@ -30,8 +31,8 @@ class TaskViewController: UIViewController {
         navigationItem.leftBarButtonItem? = editButtonItem
         navigationItem.leftBarButtonItem?.title = "編集"
         //編集ボタンの設定
-       taskTableView.isEditing = false
-       taskTableView.allowsSelectionDuringEditing = true
+        taskTableView.isEditing = false
+        taskTableView.allowsSelectionDuringEditing = true
     }
     
     //編集モードの切り替え
@@ -40,21 +41,22 @@ class TaskViewController: UIViewController {
         taskTableView.isEditing = editing
         if taskTableView.isEditing == false {
             //cellの編集前の編集ボタンのタイトル
-             navigationItem.leftBarButtonItem?.title = "編集"
-         } else if taskTableView.isEditing == true {
+            navigationItem.leftBarButtonItem?.title = "編集"
+        } else if taskTableView.isEditing == true {
             //cellの編集時の編集ボタンのタイトル
-             navigationItem.leftBarButtonItem?.title = "完了"
-         }
+            navigationItem.leftBarButtonItem?.title = "完了"
+        }
     }
     
     //タスクを追加
     func insertNewTask() {
         if let text = insertTaskTextField.text {
-        let task = Task(task: text)
-        taskArray.append(task)
-        UserDefaults.standard.save(task)
-        taskTableView.reloadData()
-        insertTaskTextField.text = ""
+            let task = Task(task: text)
+            taskArray.append(task)
+            UserDefaults.standard.save(task)
+            taskTableView.reloadData()
+            insertTaskTextField.text = ""
+            insertTaskTextField.endEditing(true)
         } else {
             print("error")
         }
@@ -62,14 +64,12 @@ class TaskViewController: UIViewController {
     
     //textFieldの中身が空の時、警告が出る
     func showAlert() {
-        let alert = UIAlertController(title:"",
-        message: "タスクを入力してください",
-        preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title:"",message: "タスクを入力してください",preferredStyle: UIAlertController.Style.alert)
         present(alert, animated: true, completion: nil)
         //3秒後にアラートが消える
         let when = DispatchTime.now() + 3
         DispatchQueue.main.asyncAfter(deadline: when){
-        self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -83,7 +83,7 @@ class TaskViewController: UIViewController {
         //addNewTaskButtonを押すとタスクが追加される
         insertNewTask()
     }
-
+    
 }
 
 //tableViewについて
@@ -100,39 +100,38 @@ extension TaskViewController: UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     
-
+    
     //tableViewの編集を許可
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-   //cellが編集モード中に移動できるか指定
+    //cellが編集モード中に移動できるか指定
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-         return true
+        return true
     }
-
+    
     //cellの並び替え
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-       }
+    }
     
     //cellの編集を可能にする
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
-       }
+    }
     
     //tableView内のセルを削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         //画面上のcellを削除
         if editingStyle == UITableViewCell.EditingStyle.delete {
             taskArray.remove(at: indexPath.row)
-            taskTableView.deleteRows(at: [indexPath as IndexPath],
-            with:UITableView.RowAnimation.automatic)
+            taskTableView.deleteRows(at: [indexPath as IndexPath],with:UITableView.RowAnimation.automatic)
             //UserDefaultsからcellを削除
             UserDefaults.standard.delete(index: indexPath.row)
         }
     }
-
-  }
+    
+}
 
 //textFieldについて
 extension TaskViewController : UITextFieldDelegate {
@@ -142,10 +141,10 @@ extension TaskViewController : UITextFieldDelegate {
         //textFieldの中身が空の時、警告が出る
         if insertTaskTextField.text == "" {
             showAlert()
-            return true
-        } else {
-            insertNewTask()
-            return true
         }
+        insertNewTask()
+            return true
     }
+    
 }
+

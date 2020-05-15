@@ -10,7 +10,6 @@ import Foundation
 
 //保存対象のカスタムクラス
 class Task :Codable {
-    
     var contents:String
     var isImportant = false
     init(task:String) {

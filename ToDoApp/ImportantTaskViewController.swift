@@ -13,6 +13,7 @@ class ImportantTaskViewController: UIViewController {
     @IBOutlet weak var importantTaskTableView: UITableView!
     
     var taskArray:[Task] = []
+    var task:Task?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,13 +21,19 @@ class ImportantTaskViewController: UIViewController {
         //デリゲートを定義
         importantTaskTableView.delegate = self
         importantTaskTableView.dataSource = self
+        
         //データの読み取り処理を行う
-         taskArray = UserDefaults.standard.load()
-         //編集ボタンの表示
-         navigationController?.isNavigationBarHidden = false
-         navigationItem.leftBarButtonItem? = editButtonItem
-         navigationItem.leftBarButtonItem?.title = "編集"
-         //編集ボタンの設定
+        guard let task = task else {
+            return
+        }
+        UserDefaults.standard.loadImportantTask(task: task, index: taskArray.count)
+        
+        
+        //編集ボタンの表示
+        navigationController?.isNavigationBarHidden = false
+        navigationItem.leftBarButtonItem? = editButtonItem
+        navigationItem.leftBarButtonItem?.title = "編集"
+        //編集ボタンの設定
         importantTaskTableView.isEditing = false
         importantTaskTableView.allowsSelectionDuringEditing = true
     }
@@ -44,8 +51,6 @@ class ImportantTaskViewController: UIViewController {
         }
     }
     
-
-    
 }
 
 
@@ -58,41 +63,41 @@ extension ImportantTaskViewController: UITableViewDelegate,UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskTableViewCell") as! taskTableViewCell
         cell.setup(task: taskArray[indexPath.row], index: indexPath.row)
         return cell
-        }
+    }
     
-     //tableViewの編集を許可
-     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-         return true
-     }
-     
+    //tableViewの編集を許可
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     //cellが編集モード中に移動できるか指定
-     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-          return true
-     }
-
-     //cellの並び替え
-     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        }
-     
-     //cellの編集を可能にする
-     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-         return .delete
-        }
-     
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    //cellの並び替え
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    }
+    
+    //cellの編集を可能にする
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
     
     
     
     //UITableViewCellを編集を削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == UITableViewCell.EditingStyle.delete {
-        taskArray.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
-        //UserDefaultsからcellを削除
-        UserDefaults.standard.delete(index: indexPath.row)
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            taskArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
+            //UserDefaultsからcellを削除
+            UserDefaults.standard.delete(index: indexPath.row)
         }
         
     }
-
+    
 }
 
 

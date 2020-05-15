@@ -16,18 +16,16 @@ class taskTableViewCell: UITableViewCell {
     
     var task:Task?
     var index: Int?
-//    var isImportant = UIImage(named: "importantTask.png")
-//    var isNotImportant = UIImage(named: "notImportantTask.png")
     
     //フラグを定義
     var flg = false
-
-
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
@@ -46,7 +44,6 @@ class taskTableViewCell: UITableViewCell {
     
     @IBAction func addFavoriteTaskButton(_ sender: UIButton) {
         //ボタンの画像を切り替える処理
-        //重要タスクを追加する処理
         guard let task = task, let index = index else {
             return
         }
@@ -61,10 +58,10 @@ class taskTableViewCell: UITableViewCell {
     }
     
     
-    }
+}
 
 
-    
-    
-    
+
+
+
 
