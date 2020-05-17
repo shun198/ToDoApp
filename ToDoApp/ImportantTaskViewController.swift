@@ -22,11 +22,11 @@ class ImportantTaskViewController: UIViewController {
         importantTaskTableView.delegate = self
         importantTaskTableView.dataSource = self
         
-        //データの読み取り処理を行う
         guard let task = task else {
             return
         }
-        UserDefaults.standard.loadImportantTask(task: task, index: taskArray.count)
+        //データの読み取り処理を行う
+        taskArray = UserDefaults.standard.loadImportantTask(task: task)
         
         
         //編集ボタンの表示

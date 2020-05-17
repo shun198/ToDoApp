@@ -69,23 +69,21 @@ extension UserDefaults {
         set(loadData, forKey: taskKey)
     }
     
-    //重要タスクを取り込む
-    func loadImportantTask(task:Task, index:Int) {
-        var loadData:[Data] = []
-        var importantTask:[Task] = load()
-        if  !task.isImportant {
-            importantTask.append(task)
-        } else {
-            importantTask.remove(at: index)
+
+    func loadImportantTask(task:Task) -> [Task] {
+        guard let loadData = array(forKey: taskKey) else {
+            return []
         }
-        for task in importantTask {
-            if let data = try? JSONEncoder().encode(task) {
-                loadData.append(data)
+        var tasks: [Task] = []
+        if task.isImportant  {
+            
+            for element in loadData {
+                if let data = element as? Data, let task = try? JSONDecoder().decode(Task.self, from: data) {
+                    tasks.append(task)
+                }
             }
         }
-        set(loadData,forKey: taskKey)
+        return tasks
     }
 
-    
 }
-
