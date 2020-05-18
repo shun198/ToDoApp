@@ -96,55 +96,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <sections>
-                            <tableViewSection headerTitle="背景色" id="1D6-vC-ucy">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Uwa-9l-Ypu">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uwa-9l-Ypu" id="1B8-xQ-Xl2">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJc-d4-pbs">
-                                                    <rect key="frame" x="20" y="-3" width="104" height="50"/>
-                                                    <state key="normal" title="Button" image="default"/>
-                                                    <connections>
-                                                        <action selector="changeToDefaultColor:" destination="ssU-ke-ww3" eventType="touchUpInside" id="QXI-GP-NjX"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oxE-Up-vVm">
-                                                    <rect key="frame" x="155" y="-3" width="104" height="50"/>
-                                                    <state key="normal" title="Button" image="red"/>
-                                                    <connections>
-                                                        <action selector="changeToRedColor:" destination="ssU-ke-ww3" eventType="touchUpInside" id="f3Z-Bc-9bc"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P0g-PN-e0y">
-                                                    <rect key="frame" x="290" y="-3" width="104" height="50"/>
-                                                    <state key="normal" title="Button" image="green"/>
-                                                    <connections>
-                                                        <action selector="changeToGreenColor:" destination="ssU-ke-ww3" eventType="touchUpInside" id="LOo-3M-WHI"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="oxE-Up-vVm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HJc-d4-pbs" secondAttribute="trailing" constant="8" symbolic="YES" id="DIb-oy-sfd"/>
-                                                <constraint firstItem="oxE-Up-vVm" firstAttribute="centerY" secondItem="1B8-xQ-Xl2" secondAttribute="centerY" id="DtU-qe-VIr"/>
-                                                <constraint firstItem="P0g-PN-e0y" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oxE-Up-vVm" secondAttribute="trailing" constant="8" symbolic="YES" id="E8n-At-VKh"/>
-                                                <constraint firstItem="P0g-PN-e0y" firstAttribute="trailing" secondItem="1B8-xQ-Xl2" secondAttribute="trailingMargin" id="FtK-MP-qLD"/>
-                                                <constraint firstItem="P0g-PN-e0y" firstAttribute="centerY" secondItem="1B8-xQ-Xl2" secondAttribute="centerY" id="KbY-df-uqt"/>
-                                                <constraint firstItem="HJc-d4-pbs" firstAttribute="centerY" secondItem="1B8-xQ-Xl2" secondAttribute="centerY" id="VbR-mt-SMS"/>
-                                                <constraint firstItem="HJc-d4-pbs" firstAttribute="leading" secondItem="1B8-xQ-Xl2" secondAttribute="leadingMargin" id="h0c-od-SxG"/>
-                                                <constraint firstItem="oxE-Up-vVm" firstAttribute="centerX" secondItem="1B8-xQ-Xl2" secondAttribute="centerX" id="jqb-V0-RB9"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
                             <tableViewSection headerTitle="アプリについて" id="YlD-82-nY8">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="d5Z-LY-UVc">
-                                        <rect key="frame" x="0.0" y="128" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d5Z-LY-UVc" id="v3c-xx-rHr">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -184,11 +139,6 @@
                     <navigationItem key="navigationItem" title="設定" id="fCy-wb-QT8">
                         <barButtonItem key="backBarButtonItem" title="戻る" id="MCb-tz-Qcd"/>
                     </navigationItem>
-                    <connections>
-                        <outlet property="defaultColorButton" destination="HJc-d4-pbs" id="VFX-cn-NdF"/>
-                        <outlet property="greenColorButton" destination="P0g-PN-e0y" id="y5C-eS-dmA"/>
-                        <outlet property="redColorButton" destination="oxE-Up-vVm" id="uBR-Jv-dJu"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6xE-et-dAq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -355,12 +305,9 @@
         <segue reference="8d4-zl-7D4"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="default" width="50" height="50"/>
         <image name="ellipsis.circle" catalog="system" width="128" height="121"/>
         <image name="exclamationmark.octagon" catalog="system" width="128" height="112"/>
-        <image name="green" width="50" height="50"/>
         <image name="notImportantTask" width="24" height="24"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
-        <image name="red" width="50" height="50"/>
     </resources>
 </document>

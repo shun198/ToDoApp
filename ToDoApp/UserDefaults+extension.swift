@@ -70,19 +70,19 @@ extension UserDefaults {
     }
     
 
-    func loadImportantTask(task:Task) -> [Task] {
+    func loadImportantTask() -> [Task] {
         guard let loadData = array(forKey: taskKey) else {
             return []
         }
         var tasks: [Task] = []
-        if task.isImportant  {
-            
+        
             for element in loadData {
                 if let data = element as? Data, let task = try? JSONDecoder().decode(Task.self, from: data) {
+                    if task.isImportant {
                     tasks.append(task)
+                    }
                 }
             }
-        }
         return tasks
     }
 

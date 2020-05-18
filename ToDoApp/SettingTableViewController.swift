@@ -10,25 +10,14 @@ import UIKit
 
 class SettingTableViewController: UITableViewController {
 
-    @IBOutlet weak var defaultColorButton: UIButton!
-    @IBOutlet weak var redColorButton: UIButton!
-    @IBOutlet weak var greenColorButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+//        tableView.delegate = self
+//        tableView.dataSource = self
     }
 
-    @IBAction func changeToDefaultColor(_ sender: Any) {
-    }
-    
-    @IBAction func changeToRedColor(_ sender: Any) {
-    }
-    
-    @IBAction func changeToGreenColor(_ sender: Any) {
-    }
-    
+
     
     // MARK: - Table view data source
 

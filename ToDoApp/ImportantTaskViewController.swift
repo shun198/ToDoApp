@@ -22,13 +22,6 @@ class ImportantTaskViewController: UIViewController {
         importantTaskTableView.delegate = self
         importantTaskTableView.dataSource = self
         
-        guard let task = task else {
-            return
-        }
-        //データの読み取り処理を行う
-        taskArray = UserDefaults.standard.loadImportantTask(task: task)
-        
-        
         //編集ボタンの表示
         navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem? = editButtonItem
@@ -36,6 +29,12 @@ class ImportantTaskViewController: UIViewController {
         //編集ボタンの設定
         importantTaskTableView.isEditing = false
         importantTaskTableView.allowsSelectionDuringEditing = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //データの読み取り処理を行う
+        taskArray = UserDefaults.standard.loadImportantTask()
+        importantTaskTableView.reloadData()
     }
     
     //編集モードの切り替え
@@ -83,8 +82,6 @@ extension ImportantTaskViewController: UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
-    
-    
     
     
     //UITableViewCellを編集を削除
